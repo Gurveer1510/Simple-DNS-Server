@@ -28,7 +28,14 @@ export interface DNSHeader {
 class DNS {
     static write(values: DNSHeader){
         const header = Buffer.alloc(12)
-        const flags = values.qr | values.opcode | values.aa | values.tc | values.rd | values.rd | values.z | values.rcode
+        const flags = (values.qr << 15)    // Move QR to the 15th bit
+            | (values.opcode << 11) // Move OPCODE to bits 11-14
+            | (values.aa << 10)     // Move AA to the 10th bit
+            | (values.tc << 9)      // Move TC to the 9th bit
+            | (values.rd << 8)      // Move RD to the 8th bit
+            | (values.ra << 7)      // Move RA to the 7th bit
+            | (values.z << 4)       // Move Z (3 bits) to bits 4-6
+            | (values.rcode);   
         header.writeUInt16BE(values.id, 0)
         header.writeUInt16BE(flags, 2)
         header.writeUInt16BE(values.qdcount, 4)
