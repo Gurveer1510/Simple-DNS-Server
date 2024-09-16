@@ -27,7 +27,7 @@ const defaultQuestion: DNSQ = {
 console.log("Logs from your program will appear here!");
 
 
-const udpSocket: dgram.Socket = dgram.createSocket("udp4", () => console.log("message recieved"));
+const udpSocket: dgram.Socket = dgram.createSocket("udp4");
 udpSocket.bind(2053, "127.0.0.1");
 
 udpSocket.on("message", (data: Buffer, remoteAddr: dgram.RemoteInfo) => {
