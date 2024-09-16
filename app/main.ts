@@ -35,7 +35,7 @@ udpSocket.on("message", (data: Buffer, remoteAddr: dgram.RemoteInfo) => {
         console.log(`Received data from ${remoteAddr.address}:${remoteAddr.port}`);
         const header = DNSHeaderClass.write({...defaultHeader, QCOUNT: 1})
         const question = DNSQuestion.write([defaultQuestion])
-        const response = Buffer.from(header);
+        const response = Buffer.concat([header, question]);
         udpSocket.send(response, remoteAddr.port, remoteAddr.address);
     } catch (e) {
         console.log(`Error sending data: ${e}`);
