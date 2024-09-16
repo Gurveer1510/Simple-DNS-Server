@@ -21,13 +21,17 @@ class DNSA {
                 return Buffer.concat([length,Buffer.from(n)])
 
             })
+
+            const ipParts = data.split('.').map(octet => parseInt(octet, 10));
+            const ipBuffer = Buffer.from(ipParts); 
+
             const buffer = Buffer.alloc(10 + data.length)
             buffer.writeUInt16BE(type)
             buffer.writeUInt16BE(classname,2)
             buffer.writeUInt16BE(ttl,4)
-            buffer.writeUInt16BE(data.length,8)
+            buffer.writeUInt16BE(ipBuffer.length,8)
 
-            return Buffer.concat([...str,Buffer.from([0]), buffer, Buffer.from(data + "\0", "binary")])
+            return Buffer.concat([...str,Buffer.from([0]), buffer, ipBuffer])
         }))
     }
 }
