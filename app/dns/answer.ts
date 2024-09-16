@@ -21,7 +21,7 @@ class DNSA {
                 return Buffer.concat([length,Buffer.from(n)])
 
             })
-            const buffer = Buffer.alloc(10)
+            const buffer = Buffer.alloc(10 + data.length)
             buffer.writeUInt16BE(type)
             buffer.writeUInt16BE(classname,2)
             buffer.writeUInt16BE(ttl,4)
