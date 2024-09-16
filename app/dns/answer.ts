@@ -25,8 +25,8 @@ class DNSA {
             const ipParts = data.split('.').map(octet => parseInt(octet, 10));
             const ipBuffer = Buffer.from(ipParts); 
 
-            const buffer = Buffer.alloc(10 + data.length)
-            buffer.writeUInt16BE(type)
+            const buffer = Buffer.alloc(10)
+            buffer.writeUInt16BE(type, 0)
             buffer.writeUInt16BE(classname,2)
             buffer.writeUInt16BE(ttl,4)
             buffer.writeUInt16BE(ipBuffer.length,8)

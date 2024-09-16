@@ -30,7 +30,7 @@ const defaultAnswer : DNSAnwer = {
     type: DNSTYPE.A,
     classname: DNSCLASS.IN,
     ttl: 60,
-    data: "\x08\x08\x08\x08 "
+    data: "8.8.8.8"
 }
 
 console.log("Logs from your program will appear here!");
@@ -45,7 +45,7 @@ udpSocket.on("message", (data: Buffer, remoteAddr: dgram.RemoteInfo) => {
         const header = DNSHeaderClass.write({...defaultHeader, QCOUNT: 1, ancount: 1})
         const question = DNSQuestion.write([defaultQuestion])
         const answer = DNSA.write([defaultAnswer])
-        console.log(question.toString())
+        
         const response = Buffer.concat([header, question, answer]);
         udpSocket.send(response, remoteAddr.port, remoteAddr.address);
     } catch (e) {
