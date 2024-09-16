@@ -26,7 +26,7 @@ const defaultQuestion: DNSQ = {
 }
 
 const defaultAnswer : DNSAnwer = {
-    name: "codecrafeters.io",
+    name: "codecrafters.io",
     type: DNSTYPE.A,
     classname: DNSCLASS.IN,
     ttl: 60,
