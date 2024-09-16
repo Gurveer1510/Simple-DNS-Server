@@ -3,7 +3,7 @@ import DNS, { DNSHeader, OPCODE, RESPONSE_CODE } from "./dns/header";
 
 const defaultHeader: DNSHeader = {
     id: 1234,
-    qr: 0,
+    qr: 1,
     opcode: OPCODE.STANDARD_QUERY,
     aa: 0,
     tc: 0,
