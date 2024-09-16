@@ -3,7 +3,7 @@ import DNS, { DNSHeader, OPCODE, RESPONSE_CODE } from "./dns/header";
 
 const defaultHeader: DNSHeader = {
     id: 1234,
-    qr: 1,
+    qr: 0,
     opcode: OPCODE.STANDARD_QUERY,
     aa: 0,
     tc: 0,
@@ -16,6 +16,7 @@ const defaultHeader: DNSHeader = {
     nscount: 0,
     arcount: 0
 }
+console.log(defaultHeader);
 
 console.log("Logs from your program will appear here!");
 
