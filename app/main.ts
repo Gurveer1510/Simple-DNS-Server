@@ -12,7 +12,7 @@ const defaultHeader: DNSHeader = {
     ra: 0,
     z: 0,
     rcode: RESPONSE_CODE.NO_ERROR,
-    qdcount: 0,
+    QCOUNT: 0,
     ancount: 0,
     nscount: 0,
     arcount: 0
@@ -33,7 +33,7 @@ udpSocket.bind(2053, "127.0.0.1");
 udpSocket.on("message", (data: Buffer, remoteAddr: dgram.RemoteInfo) => {
     try {
         console.log(`Received data from ${remoteAddr.address}:${remoteAddr.port}`);
-        const header = DNSHeaderClass.write({...defaultHeader, qdcount: 1})
+        const header = DNSHeaderClass.write({...defaultHeader, QCOUNT: 1})
         const question = DNSQuestion.write([defaultQuestion])
         const response = Buffer.from(header);
         udpSocket.send(response, remoteAddr.port, remoteAddr.address);

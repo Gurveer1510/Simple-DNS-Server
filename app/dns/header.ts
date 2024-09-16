@@ -18,7 +18,7 @@ export interface DNSHeader {
     ra: number,
     z : number,
     rcode: RESPONSE_CODE,
-    qdcount : number,
+    QCOUNT : number,
     ancount: number,
     nscount: number,
     arcount: number
@@ -38,7 +38,7 @@ class DNSHeaderClass {
             | (values.rcode);   
         header.writeUInt16BE(values.id, 0)
         header.writeUInt16BE(flags, 2)
-        header.writeUInt16BE(values.qdcount, 4)
+        header.writeUInt16BE(values.QCOUNT, 4)
         header.writeUInt16BE(values.ancount, 6)
         header.writeUInt16BE(values.nscount, 8)
         header.writeUInt16BE(values.arcount, 10)
