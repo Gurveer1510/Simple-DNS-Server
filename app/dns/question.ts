@@ -18,13 +18,16 @@ class DNSQuestion {
         return Buffer.concat(questions.map((question) => {
             const {name, type, classname} = question
 
-            const str = name.split(".").map(n => `${String.fromCharCode(n.length)}${n}`)
+            const str = name.split(".").map(label => {
+                const length = Buffer.from([label.length])
+                return Buffer.concat([length, Buffer.from(label)])
+            })
 
             const typeAndClass = Buffer.alloc(4)
             typeAndClass.writeUInt16BE(type)
             typeAndClass.writeUInt16BE(classname, 2)
 
-            return Buffer.concat([Buffer.from(str + "\0", "binary"), typeAndClass])
+            return Buffer.concat([...str,Buffer.from([0]), typeAndClass])
         }))
     }
 
