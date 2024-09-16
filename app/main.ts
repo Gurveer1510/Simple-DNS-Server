@@ -1,5 +1,6 @@
 import * as dgram from "dgram";
-import DNS, { DNSHeader, OPCODE, RESPONSE_CODE } from "./dns/header";
+import DNSHeaderClass, { DNSHeader, OPCODE, RESPONSE_CODE } from "./dns/header";
+import DNSQuestion, { DNSQ, DNSQCLASS, DNSQTYPE } from "./dns/question";
 
 const defaultHeader: DNSHeader = {
     id: 1234,
@@ -16,7 +17,12 @@ const defaultHeader: DNSHeader = {
     nscount: 0,
     arcount: 0
 }
-console.log(defaultHeader);
+
+const defaultQuestion: DNSQ = {
+    name: "codecrafters.io",
+    type: DNSQTYPE.A,
+    classname: DNSQCLASS.IN
+}
 
 console.log("Logs from your program will appear here!");
 
@@ -27,10 +33,8 @@ udpSocket.bind(2053, "127.0.0.1");
 udpSocket.on("message", (data: Buffer, remoteAddr: dgram.RemoteInfo) => {
     try {
         console.log(`Received data from ${remoteAddr.address}:${remoteAddr.port}`);
-        const header = DNS.write(defaultHeader)
-
-        console.log(data.toString("utf8"))
-
+        const header = DNSHeaderClass.write({...defaultHeader, qdcount: 1})
+        const question = DNSQuestion.write([defaultQuestion])
         const response = Buffer.from(header);
         udpSocket.send(response, remoteAddr.port, remoteAddr.address);
     } catch (e) {

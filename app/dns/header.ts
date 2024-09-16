@@ -25,7 +25,7 @@ export interface DNSHeader {
 }
 
 
-class DNS {
+class DNSHeaderClass {
     static write(values: DNSHeader){
         const header = Buffer.alloc(12)
         const flags = (values.qr << 15)    // Move QR to the 15th bit
@@ -47,4 +47,4 @@ class DNS {
     }
 }
 
-export default DNS
+export default DNSHeaderClass
