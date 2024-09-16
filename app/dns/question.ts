@@ -1,16 +1,16 @@
-export enum DNSQTYPE {
+export enum DNSTYPE {
     A = 1,
     NS = 2
 }
 
-export enum DNSQCLASS {
+export enum DNSCLASS {
     IN = 1
 }
 
 export interface DNSQ {
     name: string
-    type: DNSQTYPE
-    classname: DNSQCLASS
+    type: DNSTYPE
+    classname: DNSCLASS
 }
 
 class DNSQuestion {

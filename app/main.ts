@@ -1,6 +1,6 @@
 import * as dgram from "dgram";
 import DNSHeaderClass, { DNSHeader, OPCODE, RESPONSE_CODE } from "./dns/header";
-import DNSQuestion, { DNSQ, DNSQCLASS, DNSQTYPE } from "./dns/question";
+import DNSQuestion, { DNSQ, DNSCLASS, DNSTYPE } from "./dns/question";
 
 const defaultHeader: DNSHeader = {
     id: 1234,
@@ -20,8 +20,8 @@ const defaultHeader: DNSHeader = {
 
 const defaultQuestion: DNSQ = {
     name: "codecrafters.io",
-    type: DNSQTYPE.A,
-    classname: DNSQCLASS.IN
+    type: DNSTYPE.A,
+    classname: DNSCLASS.IN
 }
 
 console.log("Logs from your program will appear here!");
